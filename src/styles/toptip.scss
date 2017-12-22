@@ -1,0 +1,38 @@
+.m-top {
+    height: 36px;
+    padding: 0 206px;
+    line-height: 36px;
+    font-size: 12px;
+    background: #F3F3F3;
+    overflow: hidden;
+    transition: all .3s;
+}
+.u-top-left, .u-top-right {
+    display: inline-block;
+}
+
+.u-top-link {
+    margin-left: 8px;
+}
+// right
+.u-top-right {
+    cursor: pointer;
+    float: right;
+}
+.u-top-close {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-right: 5px;
+    background: url('../images/buttons.png') -1px -11px;
+}
+
+@media screen and(max-width: 950px) {
+    .u-top-left {
+        max-width: 16em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+}

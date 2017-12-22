@@ -1,0 +1,34 @@
+@import './global.scss';
+$nav-color: #9DD8B1;
+
+.m-course-list-nav {
+    margin: 30px 40px;
+    float: right;
+    user-select: none;
+
+    .nav-item {
+        display: inline-block;
+        color: #666;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+
+        &:hover {
+            text-decoration: none;
+        }
+        &.is-active {
+            background: $nav-color;
+            color: #FFF;
+        }
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        &.prev, &.next {
+            background: $nav-color;
+            color: #FFF;
+            width: 30px;
+        }
+    }
+}

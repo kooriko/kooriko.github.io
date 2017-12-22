@@ -1,0 +1,44 @@
+.m-banner {
+    position: relative;
+    width: 100%;
+    height: 460px;
+}
+.u-banner-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s;
+    opacity: 0;
+
+    &.default {
+        position: static;
+    }
+    &.is-active {
+        z-index: 2;
+        opacity: 1;
+    }
+}
+
+.m-banner-controller {
+    position: absolute;
+    z-index: 10;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .u-banner-controller-item {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        top: 50%; left: 50%;
+        background: #FFF;
+        cursor: pointer;
+        &.is-active {
+            background: #333;
+        }
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}

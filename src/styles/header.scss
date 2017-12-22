@@ -1,0 +1,99 @@
+@import '../styles/global.scss';
+
+.m-header {
+    padding: 40px 200px;
+    overflow: hidden;
+}
+.m-head-left, .m-head-right {
+    display: inline-block;
+    // vertical-align: middle;
+}
+// left
+.u-head-title {
+    display: inline-block;
+    font-size: 22px;
+    vertical-align: middle;
+
+    .u-head-title-en {
+        position: relative;
+        padding-right: 30px;
+        color: $theme-color;
+
+        &:after {
+            content: '';
+            position: absolute;
+            height: 70%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            background: $theme-color;
+            right: 12px;
+        }
+    }
+}
+.u-head-follow-btn {
+    border: none;
+    margin: 0 30px 0 15px;
+    padding: 3px 12px;
+    border-radius: 2px;
+    vertical-align: middle;
+    color: #FFF;
+    background: $theme-color;
+    transition: all .3s;
+
+    &.followed {
+        border: 1px solid #CCC;
+        background: #EEE;
+        color: #666;
+
+        .u-head-follow-icon {
+            display: none;
+        }
+    }
+    &:hover:not([class*=followed]) {
+        background: $theme-hover-color;
+    }
+    .u-head-follow-icon {
+        display: inline-block;
+        margin-right: 10px;
+        height: 8px;
+        width: 8px;
+        background: url('../images/buttons.png') -12px -2px;
+    }
+}
+.u-head-follow-text {
+    font-size: 12px;
+    vertical-align: middle;
+    color: #666;
+}
+
+// right
+.m-head-right {
+    float: right;
+    overflow: hidden;
+}
+
+.m-head-linklist {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 5px;
+}
+.u-head-link {
+    display: inline-block;
+    margin-right: 50px;
+    a {
+        font-size: 16px;
+        color: #666;
+        &:hover {
+            color: $theme-color;
+        }
+    }
+}
+.u-head-search {
+    display: inline-block;
+    vertical-align: middle;
+    height: 19px;
+    width: 19px;
+    margin-top: 5px;
+    background: url('../images/buttons.png') -1px -23px;
+}

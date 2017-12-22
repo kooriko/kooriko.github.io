@@ -1,0 +1,56 @@
+.m-modal {
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(0, 0, 0, .3);
+    z-index: 99999;
+}
+
+.modal-container {
+    position: absolute;
+    border-radius: 30px;
+    padding: 50px;
+    text-align: center;
+    min-width: 300px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #FFF;
+
+    .btn-close {
+        position: absolute;
+        top: 20px; right: 20px;
+        width: 10px; height: 10px;
+        background: url('../images/buttons.png') -22px -11px;
+        cursor: pointer;
+    }
+    .title {
+        text-align: left;
+        font-size: 18px;
+        margin: 12px 0;
+    }
+    [class*="ipt"] {
+        display: block;
+        width: 275px; height: 25px;
+        padding: 10px;
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 15px;
+        border: 1px solid #DFDFDF;
+        box-shadow: 2px 2px #F1F1F1 inset;
+        background: #FAFAFA;
+
+        &::placeholder {
+            color: #CCC;
+        }
+    }
+    .btn-submit-hidden {
+        display: none;
+    }
+    .btn-submit {
+        width: 295px;
+        height: 48px;
+        margin-top: 30px;
+        background: url('../images/login.png') no-repeat;
+        cursor: pointer;
+    }
+}
+

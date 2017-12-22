@@ -1,0 +1,9 @@
+node_modules/
+.DS_Stores
+npm-debug.log
+yarn-error.log
+selenium-debug.log
+.netlify
+package-lock.json
+# dist
+src/env.js

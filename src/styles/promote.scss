@@ -1,0 +1,32 @@
+.m-promotes {
+    margin: 60px;
+    text-align: center;
+
+    .promote {
+        display: inline-block;
+        width: 30%;
+
+        .logo, .detail {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .logo {
+            margin-top: 5px;
+        }
+        .detail {
+            text-align: left;
+            width: calc(100% - 120px);
+            margin-left: 20px;
+
+            .title {
+                font-size: 22px;
+            }
+            .desc {
+                margin: 20px 0 34px;
+            }
+        }
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+}

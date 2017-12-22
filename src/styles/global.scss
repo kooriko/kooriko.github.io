@@ -1,0 +1,57 @@
+$theme-color: #21A557;
+$theme-hover-color: #32B668;
+
+button, input[type="button"] {
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+input {
+    &:focus {
+        outline: none;
+    }
+}
+body {
+    padding: 0;
+    margin: 0;
+    color: #333;
+}
+ul {
+    padding: 0;
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-size: unset;
+    font-weight: normal;
+}
+p {
+    margin: 0;
+}
+em, address {
+    font-style: normal;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: #21A557;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// body
+body {
+    min-width: 1280px;
+    font-size: 14px;
+}
+address {
+    font-size: 12px;
+}
