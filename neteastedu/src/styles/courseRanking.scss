@@ -64,11 +64,11 @@
     }
     .content {
         margin-left: 20px;
+        max-width: calc(100% - 70px);
         display: inline-block;
         vertical-align: top;
 
         .name {
-            max-width: 13em;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

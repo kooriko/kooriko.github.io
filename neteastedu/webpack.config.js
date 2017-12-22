@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 
 const HtmlPlugin = require('html-webpack-plugin');
-const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 
 const publicPath = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/' : 'https://kooriko.github.io/neteastedu/dist/';
 const devtool = process.env.NODE_ENV === 'development' ? 'source-map' : '';
@@ -61,7 +60,12 @@ const config = {
             filename: 'assets/js/[name].min.js',
             minChunks: 2
         }),
-        new UglifyjsPlugin(),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false
+        //     },
+        //     sourceMap: false
+        // }),
         new HtmlPlugin({
             template: './src/index.html',
             minify: {

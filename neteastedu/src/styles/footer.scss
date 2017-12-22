@@ -1,11 +1,13 @@
 .m-footer {
     background: #2C3339;
     color: #BEBFC0;
-    padding: 90px 255px;
+    text-align: center;
+    padding: 90px 10%;
 }
 
 .m-foot-left, .m-foot-right {
     display: inline-block;
+    text-align: left;
     vertical-align: middle;
 }
 .m-foot-title {
@@ -32,7 +34,7 @@
     }
 }
 .m-foot-left {
-    margin-right: 100px;
+    margin-right: 10%;
 }
 address {
     margin: 10px 0;
