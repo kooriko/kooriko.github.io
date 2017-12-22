@@ -1,5 +1,4 @@
-$theme-color: #21A557;
-$theme-hover-color: #32B668;
+@import './var.scss';
 
 button, input[type="button"] {
     cursor: pointer;
