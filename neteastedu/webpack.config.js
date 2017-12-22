@@ -4,7 +4,7 @@ const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 
-const publicPath = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/' : 'https://kooriko.github.io/dist/';
+const publicPath = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/' : 'https://kooriko.github.io/netestedu/dist/';
 const devtool = process.env.NODE_ENV === 'development' ? 'source-map' : '';
 
 const config = {
