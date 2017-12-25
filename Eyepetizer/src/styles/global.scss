@@ -1,0 +1,24 @@
+// reset
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+body {
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}
+
+// styles
+.flex {
+    display: flex;
+}
