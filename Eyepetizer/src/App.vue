@@ -23,5 +23,7 @@ export default {
 
 #app {
   text-align: center;
+  font-size: 14px;
+  letter-spacing: .03em;
 }
 </style>

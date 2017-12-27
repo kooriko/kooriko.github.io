@@ -30,6 +30,7 @@ export default {
     color: #888;
     font-size: 12px;
     width: 55px;
+    font-weight: 500;
     display: inline-block;
     text-align: center;
 

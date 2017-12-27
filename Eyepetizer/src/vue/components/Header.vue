@@ -2,7 +2,7 @@
     header.m-header.flex
         div.left
         h1.title
-            eye-menu(:defaultIndex="activeIndex" @change="foo")
+            eye-menu(:defaultIndex="`1`" @change="foo")
                 eye-menu-item(v-for="(item, index) in menuItems" :key="index" :index="String(index)") {{ item.name }}
         div.search
 </template>
@@ -10,6 +10,7 @@
 const template = [{
     name: '发现',
     label: '0',
+    to: 'home-discovery'
 }, {
     name: '推荐',
     label: '1',
