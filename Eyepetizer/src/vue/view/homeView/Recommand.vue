@@ -31,8 +31,7 @@ export default {
     },
     methods: {
         async requestRecommendData () {
-            await this.$store.dispatch('videos/requestRecommendData');
-            await this.$store.dispatch('videos/requestDiscoveryData');
+            // await this.$store.dispatch('videos/requestRecommendData');
         }
     },
     mounted () {

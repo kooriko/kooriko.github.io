@@ -2,15 +2,35 @@ import Vue from 'vue';
 
 import Menu from './Menu';
 import MenuItem from './MenuItem';
-import VideoItem from './Cards/FollowCard';
+import FollowCard from './Cards/FollowCard';
+import BriefCard from './Cards/BriefCard';
+import TextCard from './Cards/TextCard';
 import VideoList from './VideoList';
+import Duration from './package/duration';
+import VideoSmallCard from './Cards/VideoSmallCard';
+import DynamicInfoCard from './Cards/DynamicInfoCard';
 
 const plugin = {};
 
 plugin.install = () => {
     Vue.prototype.$bus = new Vue();
 
-    const components = [ Menu, MenuItem, VideoItem, VideoList ];
+    Vue.filter('$_secondToMin', val => {
+        const arr = [ (val / 60) | 0, val % 60 ];
+        return arr.map(item => String(item).padStart(2, '0')).join(':');
+    });
+    Vue.mixin({
+        methods: {
+            $_toVideoPage (vid) {
+                console.log(vid);
+                this.$router.push({ name: 'video', query: { id: vid } });
+            },
+            $_toAuthorPage (aid) {
+                console.log(aid);
+            }
+        }
+    })
+    const components = [ Menu, MenuItem, FollowCard, VideoList, BriefCard, TextCard, DynamicInfoCard, VideoSmallCard, Duration ];
     components.forEach(item => {
         Vue.component(item.name, item);
     });

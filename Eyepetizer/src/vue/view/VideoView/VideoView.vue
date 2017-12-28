@@ -1,7 +1,6 @@
 <template lang="pug">
     div.video-container
-        video.video(controls autoplay)
-            source(:src="video.playUrl")
+        video.video#video(controls autoplay :src="video.playUrl")
         div.content
             div.cover(:style="`background-image: url(${video.cover.blurred})`")
             button.return(@click.prevent="returnTo") 返回
@@ -18,7 +17,7 @@
                         span.value {{ consumption.replyCount }}
                     li.item 
                         span.value 缓存
-            ul.tags.section
+            ul.tags.section(v-if="tags.length")
                 li.tag(v-for="(item, index) in tags" :key="index")
                     div.cover(:style="`background-image: url(${item.headerImage};`")
                     span.name \#{{ item.name }}#
@@ -27,6 +26,8 @@
                 div.detail
                     h5.title {{ author.name }}
                     p.desc {{ author.description }}
+
+            component(v-for="(item, index) in relatedVideos" :key="index" :is="item.type" :data="item.data")
                 
 </template>
 
@@ -40,13 +41,19 @@ export default {
             return arr.map(item => String(item).padStart(2, '0')).join(':');
         }
     },
+    watch: {
+        '$route.query.id' (after) {
+            this.requestRelatedVideos(after);
+        }
+    },
     computed: {
         ...mapGetters('videos', [
-            'getVideoInfoById'
+            'getVideoById',
+            'relatedVideos'
         ]),
         video () {
-            const video = this.getVideoInfoById(this.$route.query.id);
-            if (!video) this.$router.push({path: '/'});
+            const video = this.getVideoById(this.$route.query.id);
+            if (!video) this.$router.push({name: 'home-discovery'});
             return video.data;
         },
         consumption () {
@@ -64,14 +71,20 @@ export default {
     },
     methods: {
         returnTo () {
-            console.log(`!!!`);
             this.$router.push({path: '/'});
+        },
+        requestRelatedVideos (id) {
+            const params = { id };
+            this.$store.dispatch('videos/requestRelatedVideos', params);
         }
+    },
+    created () {
+        this.requestRelatedVideos(this.$route.query.id);
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .video-container {
     .video {
         width: 100vw;
@@ -80,8 +93,6 @@ export default {
         position: relative;
         color: #FFF;
         overflow: hidden;
-        padding: 5px 4vw;
-        text-align: left;
 
         .return {
             position: absolute;
@@ -103,6 +114,7 @@ export default {
         }
         .section {
             position: relative;
+            padding: 0 4vw;
             &:after {
                 content: '';
                 position: absolute;
@@ -118,7 +130,8 @@ export default {
             position: relative;
             flex-direction: column;
             align-items: flex-start;
-            padding: 5px 0 10px;
+            padding-top: 5px;
+            padding-bottom: 10px;
 
             .title {
                 padding: 5px 0;
@@ -146,7 +159,8 @@ export default {
             }
         }
         .tags {
-            padding: 15px 0;
+            padding-top: 15px;
+            padding-bottom: 15px;
             display: flex;
             flex-direction: row;
 
@@ -179,7 +193,8 @@ export default {
         }
         .author {
             display: flex;
-            padding: 20px 0;
+            padding-top: 20px;
+            padding-bottom: 20px;
             .avatar {
                 height: 40px;
                 width: 40px;

@@ -1,6 +1,6 @@
 <template lang="pug">
-    section
-        component(v-for="(item, index) in discoveryData" :is="item.type" :data="item.data")
+    section.m-section
+        component(v-for="(item, index) in discoveryData" :is="item.type" :key="index" :data="item.data")
 </template>
 
 <script>

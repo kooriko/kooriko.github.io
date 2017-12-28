@@ -22,8 +22,8 @@ export default {
 @import './styles/global.scss';
 
 #app {
-  text-align: center;
   font-size: 14px;
+  color: #444;
   letter-spacing: .03em;
 }
 </style>

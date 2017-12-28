@@ -1,109 +1,67 @@
 <template lang="pug">
-    li.video-item(:class="direction ? direction : null")
-        div.cover-container(@click="jumpToVideo(id)")
-            img.cover(:src="cover")
-            span.duration {{ duration | secondToMin }}
-        div.desc
-            img.avatar(:src="avatar")
-            div.detail 
-                h4.title {{ title }}
-                span.slogan {{ slogan }}
+    div.m-follow-card
+        div.video-container
+            img.cover(:src="content.cover.feed" width="92vw" @click="$_toVideoPage(content.id)")
+            duration(:duration="content.duration")
+        div.brief
+            img.author-avatar(width="40" height="40" :src="header.icon")
+            div.detail(@click="toAuthorPage(content.author.id)")
+                p.title(:class="[ header.textAlign ? `align--${header.textAlign}` : null ]") {{ header.title }}
+                p.desc {{ header.description }}
 </template>
 <script>
 export default {
-    name: 'video-item',
-    inject: [ 'direction' ],
+    name: 'follow-card',
     props: {
-        cover: String,
-        duration: Number,
-        avatar: String,
-        title: String,
-        slogan: String,
-        id: Number,
-        authorId: Number
+        data: Object
     },
-    filters: {
-        secondToMin (val) {
-            const arr = [ (val / 60) | 0, val % 60 ];
-            return arr.map(item => String(item).padStart(2, '0')).join(':');
+    computed: {
+        header () {
+            return this.data.header;
+        },
+        content () {
+            return this.data.content.data;
         }
     },
-    methods: {
-        jumpToVideo (id) {
-            this.$router.push({ name: 'video', query: { id } });
-        }
-    }
 }
 </script>
 <style lang="scss" scoped>
-.video-item {
+.m-follow-card {
     display: flex;
     flex-direction: column;
-
-    &.row {
-        padding-bottom: 20px;
-        padding-right: 0;
-
-        &:first-child {
-            padding-left: 5vw;
-        }
-        &:not(:first-child) {
-            padding-left: 2.5vw;
-        }
-        &:last-child {
-            padding-right: 5vw;
-        }
-    }
-
-    .cover-container {
+    padding: 5px 3vw;
+    .video-container {
         position: relative;
-        text-align: left;
-
         .cover {
-            width: 90vw;
+            width: 100%;
             border-radius: 5px;
         }
-        .duration {
-            position: absolute;
-            right: 10px; bottom: 10px;
-            display: inline-block;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 12px;
-            color: #FFF;
-            background: #333;
-
-        }
     }
 
-    .desc {
+    .brief {
         display: flex;
-        margin-top: 10px;
         flex-direction: row;
-
-        .avatar {
-            width: 40px;
-            height: 40px;
+        padding: 2vw 0;
+        
+        .author-avatar {
             border-radius: 50%;
+            margin-right: 3vw;
         }
+
         .detail {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            margin-left: 5px;
 
             .title {
-                max-height: 60vw;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                letter-spacing: 0.07em;
+                font-weight: 400;
             }
-            .slogan {
-                font-weight: 300;
+            .desc {
                 font-size: 12px;
+                font-weight: 300;
+                color: #999;
             }
         }
     }
 }
 </style>
+
