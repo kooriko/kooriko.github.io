@@ -8,7 +8,7 @@
             div.simple-video(@click="$_toVideoPage(simpleVideo.id)")
                 div.video-img
                     img.cover(:src="simpleVideo.cover.feed")
-                    duration(:duration="simpleVideo.duration")
+                    m-duration(:duration="simpleVideo.duration")
                 div.video-info
                     p.title {{ simpleVideo.title }}
                     p.desc \#{{ simpleVideo.category }}

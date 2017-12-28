@@ -2,8 +2,8 @@
     header.m-header.flex
         div.left
         h1.title
-            eye-menu(:defaultIndex="`1`" @change="foo")
-                eye-menu-item(v-for="(item, index) in menuItems" :key="index" :index="String(index)") {{ item.name }}
+            m-eye-menu(:defaultIndex="`1`" @change="foo")
+                m-eye-menu-item(v-for="(item, index) in menuItems" :key="index" :index="String(index)") {{ item.name }}
         div.search
 </template>
 <script>

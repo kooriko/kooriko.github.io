@@ -2,7 +2,7 @@
     div.m-video-small-card(@click="$_toVideoPage(data.id)")
         div.video-container
             img.cover(:src="data.cover.feed")
-            duration(:duration="data.duration")
+            m-duration(:duration="data.duration")
         div.brief
             p.title {{ data.title }}
             p.desc(:class="[ $route.name === 'video' ? 'color--lighten' : null ]") {{ desc }}

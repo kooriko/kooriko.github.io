@@ -2,7 +2,7 @@
     div.m-follow-card
         div.video-container
             img.cover(:src="content.cover.feed" width="92vw" @click="$_toVideoPage(content.id)")
-            duration(:duration="content.duration")
+            m-duration(:duration="content.duration")
         div.brief
             img.author-avatar(width="40" height="40" :src="header.icon")
             div.detail(@click="toAuthorPage(content.author.id)")

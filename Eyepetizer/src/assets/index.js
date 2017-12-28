@@ -9,6 +9,11 @@ import VideoList from './VideoList';
 import Duration from './package/duration';
 import VideoSmallCard from './Cards/VideoSmallCard';
 import DynamicInfoCard from './Cards/DynamicInfoCard';
+import HorizontalScrollCard from './Cards/HorizontalScrollCard';
+
+import VideoCollectionWithBrief from './Collections/VideoCollectionWithBrief';
+import Video from './package/video';
+import Banner from './package/banner';
 
 const plugin = {};
 
@@ -30,9 +35,24 @@ plugin.install = () => {
             }
         }
     })
-    const components = [ Menu, MenuItem, FollowCard, VideoList, BriefCard, TextCard, DynamicInfoCard, VideoSmallCard, Duration ];
+    const components = [ 
+        Menu, 
+        MenuItem, 
+        FollowCard, 
+        VideoList, 
+        BriefCard, 
+        TextCard, 
+        DynamicInfoCard, 
+        VideoSmallCard, 
+        Duration,
+        Banner,
+        HorizontalScrollCard,
+        VideoCollectionWithBrief,
+        Video
+    ];
     components.forEach(item => {
-        Vue.component(item.name, item);
+        console.log(`m-${item.name}`);
+        Vue.component(`m-${item.name}`, item);
     });
 }
 

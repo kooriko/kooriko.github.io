@@ -16,7 +16,8 @@ const format = list => {
             const { itemList } = item.data;
             [].push.apply(videoList, itemList);
         }
-        item.type = camelCaseToKababCase(type);
+        const newType = camelCaseToKababCase(type);
+        item.type = `m-${newType}`;
     });
     return { videoList, list };
 }
@@ -74,7 +75,7 @@ const actions = {
         const res = await request.default(`http://baobab.kaiyanapp.com/api/v4/video/related?`, params);
         const { itemList } = res;
         const result = format(itemList);
-
+        console.log(result);
         commit('setVideoData', result.videoList);
         commit('setRelatedVideos', result.list);
     }
