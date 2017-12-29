@@ -11,6 +11,7 @@ import VideoSmallCard from './Cards/VideoSmallCard';
 import DynamicInfoCard from './Cards/DynamicInfoCard';
 import HorizontalScrollCard from './Cards/HorizontalScrollCard';
 
+import SquareCardCollection from './Collections/SquareCardCollection';
 import VideoCollectionWithBrief from './Collections/VideoCollectionWithBrief';
 import Video from './package/video';
 import Banner from './package/banner';
@@ -48,11 +49,11 @@ plugin.install = () => {
         Banner,
         HorizontalScrollCard,
         VideoCollectionWithBrief,
-        Video
+        Video,
+        SquareCardCollection
     ];
     components.forEach(item => {
-        console.log(`m-${item.name}`);
-        Vue.component(`m-${item.name}`, item);
+        Vue.component(item.name, item);
     });
 }
 

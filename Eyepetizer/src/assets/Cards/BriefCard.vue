@@ -8,12 +8,11 @@
 </template>
 <script>
 export default {
-    name: 'brief-card',
+    name: 'briefCard',
     props: {
         data: Object
     },
     methods: {
-        // TODO:
         actionTo () {
             const { actionUrl } = this.data;
             this.$router.push()

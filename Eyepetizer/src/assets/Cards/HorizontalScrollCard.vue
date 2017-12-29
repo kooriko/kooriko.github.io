@@ -6,13 +6,14 @@
 
 <script>
 export default {
-    name: 'horizontal-scroll-card',
+    name: 'horizontalScrollCard',
     props: {
         data: Object
     },
     computed: {
         list () {
-            return this.data.itemList;
+            const { itemList } = this.data;
+            return itemList;
         }
     }
     

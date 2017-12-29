@@ -2,7 +2,7 @@
     div.m-follow-card
         div.video-container
             img.cover(:src="content.cover.feed" width="92vw" @click="$_toVideoPage(content.id)")
-            m-duration(:duration="content.duration")
+            duration(:duration="content.duration")
         div.brief
             img.author-avatar(width="40" height="40" :src="header.icon")
             div.detail(@click="toAuthorPage(content.author.id)")
@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-    name: 'follow-card',
+    name: 'followCard',
     props: {
         data: Object
     },

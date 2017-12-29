@@ -1,15 +1,15 @@
 <template lang="pug">
-    div.m-video-small-card(@click="$_toVideoPage(data.id)")
-        div.video-container
+    div.m-video-small-card
+        div.video-container(@click="$_toVideoPage(data.id)")
             img.cover(:src="data.cover.feed")
-            m-duration(:duration="data.duration")
+            duration(:duration="data.duration")
         div.brief
             p.title {{ data.title }}
             p.desc(:class="[ $route.name === 'video' ? 'color--lighten' : null ]") {{ desc }}
 </template>
 <script>
 export default {
-    name: 'video-small-card',
+    name: 'videoSmallCard',
     props: {
         data: Object
     },

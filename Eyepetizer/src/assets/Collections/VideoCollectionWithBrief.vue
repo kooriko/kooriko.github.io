@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: 'video-collection-with-brief',
+    name: 'videoCollectionWithBrief',
     props: {
         data: Object
     },
@@ -21,10 +21,8 @@ export default {
             return this.data.header
         },
         list () {
-            this.data.itemList.forEach(item => {
-                item.type = `m-${item.type}`;
-            });
-            return this.data.itemList;
+            const { itemList } = this.data;
+            return itemList;
         }
     }
 }
@@ -63,7 +61,7 @@ export default {
     }
 
     .card-list-container {
-        height: 270px;
+        height: 280px;
         overflow: hidden;
     }
     .card-list {

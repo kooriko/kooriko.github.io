@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'text-card',
+    name: 'textCard',
     props: {
         data: Object,
     }

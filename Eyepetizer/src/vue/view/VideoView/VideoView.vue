@@ -54,7 +54,7 @@ export default {
         video () {
             const video = this.getVideoById(this.$route.query.id);
             if (!video) this.$router.push({name: 'home-discovery'});
-            return video.data;
+            return video;
         },
         consumption () {
             if (!this.video) return false;
@@ -86,6 +86,9 @@ export default {
 
 <style lang="scss" scoped>
 .video-container {
+    display: flex;
+    flex-direction: column;
+
     .video {
         width: 100vw;
     }
@@ -98,7 +101,7 @@ export default {
             position: absolute;
             z-index: 2;
             right: 4vw;
-            top: 20px;
+            top: 9.7vw;
             background-color: unset;
             color: #FFF;
             border: 1px solid #FFF;

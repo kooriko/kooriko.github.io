@@ -15,6 +15,7 @@ export default {
 <style lang="scss" scoped>
     .u-banner {
         width: 100%;
+
         .image {
             width: 100%;
             border-radius: 5px;

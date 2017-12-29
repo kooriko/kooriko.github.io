@@ -3,37 +3,45 @@ const camelCaseToKababCase = str => {
     if (str[0] === '-') str = str.slice(1);
     return str;
 }
-const format = list => {
+const getVideos = originList => {
     const videoList = [];
-    list.forEach(item => {
-        const { type } = item;
-        if (type === 'followCard') {
-            const { content } = item.data;
-            content.type === 'video' && videoList.push(content);
-        } else if (type === 'videoSmallCard') {
-            videoList.push(item);
-        } else if (type === 'videoCollectionWithBrief') {
-            const { itemList } = item.data;
-            [].push.apply(videoList, itemList);
+    const getVideoListRecursively = object => {
+        if (object.type === 'video') {
+            object.type = 'm-video';
+            videoList.push(object.data);
+            return ;
+        } else if (object.data && object.data.playUrl) {
+            videoList.push(object.data);
+            return ;
         }
-        const newType = camelCaseToKababCase(type);
-        item.type = `m-${newType}`;
+
+        Object.values(object).forEach(value => {
+            if (typeof value === 'object' && value) {
+                getVideoListRecursively(value);
+            }
+        });
+    }
+    originList.forEach(item => {
+        getVideoListRecursively(item);
     });
-    return { videoList, list };
+
+    return videoList;
 }
 
 const state = {
     pickedVideos: [],
     discoveryData: [],
     videoData: [],
-    relatedVideos: []
+    relatedVideos: [],
+    recommendData: []
 };
 
 const getters = {
     pickedVideos: state => state.pickedVideos,
-    getVideoById: state => id => state.videoData.find(item => item.data.id === id),  
+    getVideoById: state => id => state.videoData.find(item => item.id === id),  
     relatedVideos: state => state.relatedVideos,
-    discoveryData: state => state.discoveryData
+    discoveryData: state => state.discoveryData,
+    recommendData:  state => state.recommendData
 };
 
 const mutations = {
@@ -48,6 +56,9 @@ const mutations = {
     },
     setRelatedVideos (state, payload) {
         state.relatedVideos = payload;
+    },
+    setRecommendData (state, payload) {
+        state.recommendData = payload;
     }
 };
 
@@ -56,14 +67,13 @@ const actions = {
         const res = await request.default(`http://baobab.kaiyanapp.com/api/v5/index/tab/discovery?_s=f884ed7b8be709a6dfce747e8f06892e&f=iphone&net=wifi&p_product=EYEPETIZER_IOS&u=33aeddea51fc808d6dfc9f3bb66f7b4eaa177900&v=3.14.0&vc=3808`);
         const { itemList } = res;
 
-        const result = format(itemList);
-        console.log(result.videoList);
-        commit('setVideoData', result.videoList);
-        commit('setDiscoveryData', result.list);
+        const videoList = getVideos(itemList);
+
+        commit('setVideoData', videoList);
+        commit('setDiscoveryData', itemList);
     },
-    async requestRelatedVideos ({ commit }, params) {
+    async requestRelatedVideos ({ commit }, params = {}) {
         Object.assign(params, {
-            _s: '5005aa18da394ba1e9b2e66750c',
             f: 'iphone',
             net: 'wifi',
             p_product: 'EYEPETIZER_IOS',
@@ -74,24 +84,26 @@ const actions = {
 
         const res = await request.default(`http://baobab.kaiyanapp.com/api/v4/video/related?`, params);
         const { itemList } = res;
-        const result = format(itemList);
-        console.log(result);
-        commit('setVideoData', result.videoList);
-        commit('setRelatedVideos', result.list);
+        const videoList = getVideos(itemList);
+        commit('setVideoData', videoList);
+        commit('setRelatedVideos', itemList);
+    },
+    async requestRecommendData ({ commit }, params = {}) {
+        Object.assign(params, {
+            page: 0,
+            f: 'iphone',
+            net: 'wifi',
+            p_product: 'EYEPETIZER_IOS',
+            u: '33aeddea51fc808d6dfc9f3bb66f7b4eaa177900',
+            v: '3.14.0',
+            vc: '3808'
+        });
+        const res = await request.default(`http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?`, params);
+        const { itemList, nextPageUrl } = res;
+        const videoList = getVideos(itemList);
+        commit('setVideoData', videoList);
+        commit('setRecommendData', itemList);
     }
-    // async requestRecommendData ({ commit }) {
-    //     const res = await request.default(`http://baobab.kaiyanapp.com/api/v4/tabs/selected`);
-    //     const { itemList, nextPageUrl, nextPublishTime } = res;
-    //     const pickedVideos = [];
-    //     const textHeader = itemList.findIndex(item => {
-    //         if (item.type === 'video') {
-    //             pickedVideos.push(item);
-    //         }
-    //         return item.type === 'textFooter';
-    //     });
-
-    //     commit('setPickedVideos', pickedVideos);
-    // }
 }
 
 export default {

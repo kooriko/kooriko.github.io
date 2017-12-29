@@ -8,7 +8,7 @@
             div.simple-video(@click="$_toVideoPage(simpleVideo.id)")
                 div.video-img
                     img.cover(:src="simpleVideo.cover.feed")
-                    m-duration(:duration="simpleVideo.duration")
+                    duration(:duration="simpleVideo.duration")
                 div.video-info
                     p.title {{ simpleVideo.title }}
                     p.desc \#{{ simpleVideo.category }}
@@ -20,13 +20,12 @@
 </template>
 <script>
 export default {
-    name: 'dynamic-info-card',
+    name: 'DynamicInfoCard',
     props: {
         data: Object
     },
     filters: {
         getDate (val) {
-            console.log(val);
             return $(val).format('YYYY-MM-DD');
         }
     },
