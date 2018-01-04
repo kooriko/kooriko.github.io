@@ -2,7 +2,8 @@ export default async (url, originQuery = {}, method = 'get') => {
     if (!url) {
         return new Error('必须接受一个 uri 参数');
     }
-    url = url.replace(/baobab\.kaiyanapp\.com/, 'admin.itsheng.net');
+    url = url.replace('baobab.kaiyanapp.com', 'admin.itsheng.net');
+    url = url.replace('www.eyepetizer.net', 'kaiyan.itsheng.net');
     const query = Object.entries(originQuery).map(item => item.join('=')).join('&');
 
     url = `${url}${query}`;

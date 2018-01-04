@@ -41,6 +41,7 @@ export default {
         padding: 2vw 3vw;
 
         .avatar {
+            flex-shrink: 0;
             border-radius: 50%;
             margin-right: 3vw;
         }
