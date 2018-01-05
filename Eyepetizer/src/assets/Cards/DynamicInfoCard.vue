@@ -1,18 +1,16 @@
 <template lang="pug">
     div.m-dynamic-info-card(v-if="data.dynamicType === 'reply'")
-        img.user-avatar(:src="user.avatar" width="40" height="40" @click="$_toUserPage(user.uid)")
+        img.avatar(:src="user.avatar" width="40" height="40" @click="$_toUserPage(user.uid)")
         div.detail(@click="$_toVideoReplyPage(simpleVideo.id)")
-            p.nickname {{ user.nickname }}
-            p.text {{ data.text }}
+            p.nickname.g-title {{ user.nickname }}
+            p.text.g-desc {{ data.text }}
             p.reply {{ reply.message }}
             div.simple-video(@click="$_toVideoPage(simpleVideo.id)")
-                div.video-img
-                    img.cover(:src="simpleVideo.cover.feed")
-                    duration(:duration="simpleVideo.duration")
+                m-video.video-img(:data="__videoInfo")
                 div.video-info
-                    p.title {{ simpleVideo.title }}
-                    p.desc \#{{ simpleVideo.category }}
-            div.info
+                    p.g-title {{ simpleVideo.title }}
+                    p.g-desc \#{{ simpleVideo.category }}
+            div.info.g-desc
                 p.likeCount 赞 {{ reply.likeCount }}
                 p.create-date {{ reply.createDate | getDate }}
 
@@ -38,73 +36,55 @@ export default {
         },
         simpleVideo () {
             return this.data.simpleVideo;
+        },
+        __videoInfo () {
+            const { id, duration, cover, playUrl } = this.data.simpleVideo;
+
+            return { id, duration, playUrl, cover: cover.feed };
         }
     }
 }
 </script>
 <style lang="scss" scoped>
+@import '../../styles/var.scss';
+
 .m-dynamic-info-card {
-    padding: 3vw 4vw;
-    display: flex;
-    flex-direction: row;
+    @include flex(row);
+    @include split-line;
+    @include padding(3vw);
     align-items: flex-start;
 
-    .user-avatar {
-        flex-shrink: 0;
-        margin-right: 2vw;
-        border-radius: 50%;
-    }
     .detail {
-        display: flex;
-        flex-direction: column;
+        @include flex(column);
 
-        .nickname {
-            font-weight: 400;   
-        }
         .text {
-            font-size: 12px;
-            font-weight: 300;
-            margin-top: 5px;
+            font-weight: 400;
         }
         .reply {
             margin: 10px 0;
-            font-weight: 300;
+            color: #555;
+            line-height: 1.4em;
         }
         .simple-video {
-            display: flex;
-            flex-direction: row;
+            @include flex(row);
             align-items: center;
-            padding: 2vw;
+            padding: 3vw;
             background: #F5F5F5;
+            border-radius: 5px;
 
             .video-img {
-                position: relative;
                 width: 50%;
-                margin-right: 2vw;
-                .cover {
-                    width: 100%;
-                    border-radius: 3px;
-                }
             }
             .video-info {
                 width: 50%;
-
-                .title {
-                    font-weight: 500;
-                }
-                .desc {
-                    font-size: 12px;
-                    font-weight: 300;
-                }
+                margin-left: 2vw;
             }
         }
+
         .info {
-            display: flex;
+            @include flex(row);
             margin-top: 2vw;
-            flex-direction: row;
-            color: #999;
-            font-weight: 300;
-            font-size: 12px;
+            color: #777;
 
             .likeCount {
                 margin-right: 5vw;

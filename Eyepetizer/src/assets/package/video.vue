@@ -1,11 +1,12 @@
 <template lang="pug">
     li.u-video
         div.video-img(@click="$_toVideoPage(data.id)")
-            div.cover(:style="`background-image: url(${data.cover.feed});`")
+            div.cover.div(v-if="data.backgroundMode" :style="`background-image: url(${data.cover});`")
+            img.cover.img(v-else :src="data.cover")
             duration(:duration="data.duration")
-        div.video-detail
-            p.title {{ data.title }}
-            p.cetegory \#{{ data.category }}
+        div.video-detail(v-if="detail")
+            p.title {{ detail.title }}
+            p.cetegory \#{{ detail.category }}
 </template>
 <script>
 export default {
@@ -13,28 +14,39 @@ export default {
         data: Object,
     },
     name: 'm-video',
+
+    computed: {
+        detail () {
+            return this.data.detail
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
+@import '../../styles/var.scss';
     .u-video {
-        display: flex;
-        flex-direction: column;
+        @include flex(column);
         width: 100%;
 
         .video-img {
             position: relative;
-            width: 100%;
 
             .cover {
                 width: 100%;
-                height: calc(96vw * 0.57971);
-                background-position: 50% 50%;
-                background-size: cover;
-                background-repeat: no-repeat;
                 border-radius: 5px;
+
+                &.div {
+                    width: 100%;
+                    height: 96vw * 0.57971;
+                    background-position: 50% 50%;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    border-radius: 5px;
+
+                }
             }
         }
-        
+
         .video-detail {
             padding: 2vw 0;
             display: flex;

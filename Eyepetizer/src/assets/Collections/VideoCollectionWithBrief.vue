@@ -3,11 +3,10 @@
         div.header
             img.avatar(:src="header.icon" width="40" height="40")
             div.brief
-                p.title {{ header.title }}
-                p.desc {{ header.description }}
-        div.card-list-container
-            ul.card-list
-                component.scroll-card(v-for="(item, index) in list" :is="item.type" :data="item.data" :key="index")
+                p.title.g-title {{ header.title }}
+                p.desc.g-desc {{ header.description }}
+        ul.card-list
+            component.scroll-card(v-for="(item, index) in list" :is="item.type" :data="item.data" :key="index")
 </template>
 
 <script>
@@ -22,56 +21,53 @@ export default {
         },
         list () {
             const { itemList } = this.data;
-            return itemList;
+            const videoInfos = itemList.map(item => {
+                const { data, type } = item;
+                const { category, title, cover, duration, playUrl, id } = data;
+
+                const videoInfo = {
+                    type: item.type,
+                    data: { backgroundMode: true, id, duration, playUrl, cover: cover.feed, detail: { category, title } }
+                }
+                return videoInfo;
+            });
+            return videoInfos;
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/var.scss';
+
 .m-video-collection-with-brief {
-    display: flex;
-    flex-direction: column;
+    @include flex(column);
+    @include split-line;
     padding: 3vw 0;
     
+    
     .header {
-        flex-shrink: 0;
-        display: flex;
-        flex-direction: row;
+        @include flex(row);
         padding: 2vw 3vw;
 
-        .avatar {
-            flex-shrink: 0;
-            border-radius: 50%;
-            margin-right: 3vw;
-        }
-
         .brief {
-            display: flex;
-            flex-direction: column;
+            @include flex(column);
+            margin-left: 3vw;
 
-            .title {
-                font-weight: 500;
-            }
 
             .desc {
-                font-size: 12px;
-                color: #999;
+                font-weight: 400;
             }
         }
     }
-
-    .card-list-container {
-        height: 280px;
-        overflow: hidden;
-    }
     .card-list {
-        display: flex;
-        flex-shrink: 0;
-        flex-direction: row;
+        @include flex(row);
         white-space: nowrap;
-        overflow: auto;
-        padding-bottom: 40px;
+        overflow-x: auto;
+        // todo!!!
+        // ::-webkit-scrollbar {
+
+        // }
 
         .scroll-card {
             flex-shrink: 0;

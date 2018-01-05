@@ -1,10 +1,9 @@
 <template lang="pug">
     div.m-video-small-card
-        div.video-container(@click="$_toVideoPage(data.id)")
-            img.cover(:src="data.cover.feed")
-            duration(:duration="data.duration")
+        div.video-container
+            m-video(:data="__videoInfo")
         div.brief
-            p.title {{ data.title }}
+            p.title.g-title {{ data.title }}
             p.desc(:class="[ $route.name === 'video' ? 'color--lighten' : null ]") {{ desc }}
 </template>
 <script>
@@ -16,45 +15,38 @@ export default {
     computed: {
         desc () {
             return `#${this.data.category} / ${this.data.author.name}`;
+        },
+        __videoInfo () {
+            const { id, cover, playUrl, duration } = this.data;
+
+            return { id, playUrl, duration, cover: cover.feed };
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/var.scss';
+
 .m-video-small-card {
-    display: flex;
-    flex-shrink: 0;
-    flex-direction: row;
-    padding: 3vw 2vw;
+    @include flex(row);
+    @include padding(3vw);
 
         .video-container {
             width: 50%;
+            flex-shrink: 0;
             position: relative;
-
-            .cover {
-
-                width: 100%;
-                // height: 100%;
-                border-radius: 5px;
-                margin-right: 20px;
-            }
         }
 
         .brief {
-            flex: 1;
-            display: flex;
+            @include flex(column);
+            @include padding(3vw);
             justify-content: space-between;
-            flex-direction: column;
-            padding: 2vw;
 
-            .title {
-                font-weight: 600;
-            }
             .desc {
                 font-size: 12px;
                 color: #999;
-                &.color--lighten {
+                .video-container & {
                     color: #DCDCDC;
                 }
             }

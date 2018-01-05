@@ -23,7 +23,7 @@ export default {
 
 #app {
   font-size: 14px;
-  color: #444;
+  color: #333;
   letter-spacing: .03em;
 }
 </style>

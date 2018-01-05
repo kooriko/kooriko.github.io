@@ -1,11 +1,9 @@
 <template lang="pug">
     div.m-follow-card
-        div.video-container
-            img.cover(:src="content.cover.feed" width="92vw" @click="$_toVideoPage(content.id)")
-            duration(:duration="content.duration")
+        m-video(:data="__videoInfo")
         div.brief
             img.author-avatar(width="40" height="40" :src="header.icon")
-            div.detail(@click="toAuthorPage(content.author.id)")
+            div.detail(@click="toAuthorPage(author.id)")
                 p.title(:class="[ header.textAlign ? `align--${header.textAlign}` : null ]") {{ header.title }}
                 p.desc {{ header.description }}
 </template>
@@ -21,15 +19,27 @@ export default {
         },
         content () {
             return this.data.content.data;
+        },
+        author () {
+            return this.content.author;
+        },
+        __videoInfo () {
+            const { id, cover, duration, playUrl } = this.content;
+            return { id, duration, playUrl, cover: cover.feed };
         }
     },
+    created () {
+        console.log(this.__videoInfo);
+    }
 }
 </script>
 <style lang="scss" scoped>
+@import '../../styles/var.scss';
+
 .m-follow-card {
-    display: flex;
-    flex-direction: column;
-    padding: 5px 3vw;
+    @include flex(column);
+    @include padding(5vw);
+
     .video-container {
         position: relative;
         .cover {

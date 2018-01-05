@@ -1,9 +1,9 @@
 <template lang="pug">
     div.m-square-card-collection
         div.header(:class="[ header.textAlign ? `align--${header.textAlign}` : null, header.font ? `font-style--${header.font}` : null ]")
-            p.subtitle(v-if="header.subTitle" :style="`font-family: ${header.subTitleFont};`") {{ header.subTitle }}
+            p.subtitle.g-desc(v-if="header.subTitle" :style="`font-family: ${header.subTitleFont};`") {{ header.subTitle }}
             div.main-title
-                p.title {{ header.title }}
+                p.title.g-title {{ header.title }}
                 i.i-right
         div.card-list-container
             ul.card-list
@@ -27,41 +27,32 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.m-square-card-collection{
-    display: flex;
-    flex-direction: column;
+@import '../../styles/var.scss';
+
+.m-square-card-collection {
+    @include flex(column);
+    @include split-line;
     padding: 4vw 0;
 
     .header {
-        display: flex;
-        flex-direction: column;
+        @include flex(column);
         padding: 2vw 3vw;
 
         &.align--center {
             justify-content: center;
         }
+
         &.font-style--bigBold {
             .main-title .title {
                 font-size: 24px;
             }
         }
 
-
-        .subtitle {
-            font-size: 12px;
-            color: #999;
-        }
-
         .main-title {
-            display: flex;
-            flex-direction: row;
+            @include flex(row);
 
             .title {
                 font-size: 20px;
-                font-weight: 600;
-            }
-            .i-right {
-                margin-left: 2vw;
             }
         }
     }
@@ -71,9 +62,7 @@ export default {
         overflow: hidden;
     }
     .card-list {
-        display: flex;
-        flex-shrink: 0;
-        flex-direction: row;
+        @include flex(row);
         white-space: nowrap;
         overflow: auto;
         padding-bottom: 40px;

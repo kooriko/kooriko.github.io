@@ -21,43 +21,20 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '../../styles/var.scss';
 .m-brief-card {
-    padding: 2.5vw 3vw;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    flex-direction: row;
-    &:after {
-        content: '';
-        position: absolute;
-        bottom: 0; left: 3vw;
-        transform: scale(.3);
-        transform-origin: 0 0;
-        width: 500vw; height: 1px;
-        background: #EEE;
-    }
-    .avatar {
-        margin-right: 3vw;
-        &.shape--square {
-            border-radius: 5px;
-        }
+    @include flex(row);
+    @include padding(3vw);
+    @include split-line;
 
-        &shape--round {
-            border-radius: 50%;
-        }
-    }
     .content {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+        @include flex(column);
 
         .title {
-            font-size: 14px;
+            @include title-font-style;
         }
         .desc {
-            font-size: 12px;
-            font-weight: 300;
-            color: #999;
+            @include minor-font-style;
         }
     }
 }
