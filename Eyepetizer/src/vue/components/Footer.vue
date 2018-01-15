@@ -17,8 +17,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    right: 0; bottom: 0; left: 0; height: 60px;
+    position: fixed;
+    right: 0; bottom: 0; left: 0; height: 40px;
     background: #ECECEC;
 
     .item {

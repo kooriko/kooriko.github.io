@@ -2,11 +2,13 @@
     header.m-header.flex
         div.left
         h1.title
-            eye-menu(:defaultIndex="`0`" @change="foo")
+            eye-menu(:defaultIndex="categoryIndex" @change="changeCategoryIndex")
                 eye-menu-item(v-for="(item, index) in menuItems" :key="index" :index="String(index)") {{ item.name }}
         div.search
 </template>
 <script>
+import { mapGetters } from 'vuex';
+
 const template = [{
     name: '发现',
     label: '0',
@@ -77,28 +79,33 @@ const template = [{
 export default {
     data () {
         return {
-            activeIndex: "0",
+            // categoryIndex: "1",
         }
     },
     computed: {
         menuItems () {
             return template;
         },
+        ...mapGetters('ui', [
+            'categoryIndex'
+        ])
     },
     methods: {
-        foo (index) {
+        changeCategoryIndex (index) {
             const to = this.menuItems[index].to;
-        
+            this.$store.commit('ui/changeCategoryIndex', index);
+
             if (to) {
                 this.$router.push({ name: to });
             }
         }
-    }
+    },
+
 }
 </script>
 <style lang="scss">
 .m-header {
-    position: absolute;
+    position: fixed;
     top: 0; right: 0; left: 0;
     height: 40px;
     justify-content: center;

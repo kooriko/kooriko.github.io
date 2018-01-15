@@ -14,6 +14,7 @@ export default {
     },
     computed: {
         desc () {
+            console.log(this.data.author);
             return `#${this.data.category} / ${this.data.author.name}`;
         },
         __videoInfo () {

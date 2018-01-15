@@ -55,3 +55,9 @@
         font-weight: $font-weight;
         font-size: $font-size;
     }
+    @mixin text-ellipsis () {
+        // max-width: $width;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }

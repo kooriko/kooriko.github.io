@@ -21,6 +21,9 @@ export default {
 <style lang="scss">
 @import './styles/global.scss';
 
+*{
+  -webkit-overflow-scrolling: touch;
+}
 #app {
   font-size: 14px;
   color: #333;

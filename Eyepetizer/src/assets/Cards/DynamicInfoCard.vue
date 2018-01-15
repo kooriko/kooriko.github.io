@@ -57,6 +57,10 @@ export default {
     .detail {
         @include flex(column);
 
+        .nickname {
+            max-width: 65vw;
+            @include text-ellipsis;
+        }
         .text {
             font-weight: 400;
         }

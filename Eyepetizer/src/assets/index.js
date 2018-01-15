@@ -29,6 +29,7 @@ plugin.install = () => {
         methods: {
             $_toVideoPage (vid) {
                 console.log(vid);
+                console.log(window.scrollY);
                 this.$router.push({ name: 'video', query: { id: vid } });
             },
             $_toAuthorPage (aid) {
