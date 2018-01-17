@@ -16,37 +16,36 @@ import Category from '@/vue/view/homeView/Category';
 Vue.use(Router);
 
 export default new Router({
-	mode: 'history',
   routes: [
     {
-			path: '/',
-			components: {
-				header: Header,
-				default: BodyView,
-				footer: Footer
+		path: '/',
+		components: {
+			header: Header,
+			default: BodyView,
+			footer: Footer
+		},
+		children: [
+			{
+				path: '/discovery',
+				name: 'home-discovery',
+				component: Discovery
 			},
-			children: [
-				{
-					path: '/discovery',
-					name: 'home-discovery',
-					component: Discovery
-				},
-				{
-					path: '/',
-					name: 'home-recommand',
-					component: Recommand
-				},
-				{
-					path: '/daily',
-					name: 'home-daily',
-					component: Daily
-				},
-				{
-					path: '/category',
-					name: 'home-category',
-					component: Category
-				}
-			]
+			{
+				path: '/',
+				name: 'home-recommand',
+				component: Recommand
+			},
+			{
+				path: '/daily',
+				name: 'home-daily',
+				component: Daily
+			},
+			{
+				path: '/category',
+				name: 'home-category',
+				component: Category
+			}
+		]
     }, {
 			path: '/subscription',
 			name: 'subscription',
