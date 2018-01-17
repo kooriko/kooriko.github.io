@@ -10,6 +10,7 @@ import VideoView from '@/vue/view/VideoView/VideoView';
 import Recommand from '@/vue/view/homeView/Recommand';
 import Daily from '@/vue/view/homeView/Daily';
 import Discovery from '@/vue/view/homeView/Discovery';
+import Category from '@/vue/view/homeView/Category';
 
 
 Vue.use(Router);
@@ -39,6 +40,11 @@ export default new Router({
 					path: '/daily',
 					name: 'home-daily',
 					component: Daily
+				},
+				{
+					path: '/category',
+					name: 'home-category',
+					component: Category
 				}
 			]
     }, {

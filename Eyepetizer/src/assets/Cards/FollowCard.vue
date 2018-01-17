@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.m-follow-card
+    div.m-follow-card(:class="scroll ? 'scroll' : ''")
         m-video(:data="__videoInfo")
         div.brief
             img.author-avatar(width="40" height="40" :src="header.icon")
@@ -11,7 +11,8 @@
 export default {
     name: 'followCard',
     props: {
-        data: Object
+        data: Object,
+        scroll: Boolean
     },
     computed: {
         header () {
@@ -28,9 +29,6 @@ export default {
             return { id, duration, playUrl, cover: cover.feed };
         }
     },
-    created () {
-        console.log(this.__videoInfo);
-    }
 }
 </script>
 <style lang="scss" scoped>
@@ -39,11 +37,14 @@ export default {
 .m-follow-card {
     @include flex(column);
     @include padding(5vw);
-
+    &.scroll {
+        padding: 0;
+    }
     .video-container {
         position: relative;
         .cover {
             width: 100%;
+            height: 96vw * 0.6;
             border-radius: 5px;
         }
     }

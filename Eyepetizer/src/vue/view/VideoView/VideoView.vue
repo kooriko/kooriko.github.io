@@ -41,6 +41,11 @@ export default {
             return arr.map(item => String(item).padStart(2, '0')).join(':');
         }
     },
+    data () {
+        return {
+            fromPath: null
+        }
+    },
     watch: {
         '$route.query.id' (after) {
             this.requestRelatedVideos(after);
@@ -71,7 +76,7 @@ export default {
     },
     methods: {
         returnTo () {
-            this.$router.push({path: '/'});
+            this.$router.push({ path: this.fromPath });
         },
         requestRelatedVideos (id) {
             const params = { id };
@@ -80,6 +85,12 @@ export default {
     },
     created () {
         this.requestRelatedVideos(this.$route.query.id);
+    },
+    beforeRouteEnter (to, from, next) {
+        const { fullPath } = from;
+        next(vm => {
+            vm.fromPath = fullPath;
+        });
     }
 }
 </script>

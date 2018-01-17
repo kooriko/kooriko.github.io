@@ -37,7 +37,7 @@ export default {
 
                 &.div {
                     width: 100%;
-                    height: 96vw * 0.57971;
+                    height: 96vw * 0.6;
                     background-position: 50% 50%;
                     background-size: cover;
                     background-repeat: no-repeat;

@@ -14,8 +14,8 @@ export default {
     },
     computed: {
         desc () {
-            console.log(this.data.author);
-            return `#${this.data.category} / ${this.data.author.name}`;
+            // question: 这里有可能得不到 author 名？
+            return `#${this.data.category} ${this.data.author ? `/ ${this.data.author.name}` : ''}`;
         },
         __videoInfo () {
             const { id, cover, playUrl, duration } = this.data;

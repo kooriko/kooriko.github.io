@@ -6,8 +6,8 @@
                 p.title.g-title {{ header.title }}
                 i.i-right
         div.card-list-container
-            ul.card-list
-                component.scroll-card(v-for="(item, index) in list" :data="item.data" :key="index" :is="item.type")
+            ul.card-list(ref="list")
+                component.scroll-card(v-for="(item, index) in list" :data="item.data" :key="index" :scroll="true" :is="item.type")
 </template>
 <script>
 export default {
@@ -22,7 +22,7 @@ export default {
         list () {
             const { itemList } = this.data;
             return itemList;
-        }
+        },
     }
 }
 </script>
@@ -58,14 +58,13 @@ export default {
     }
 
     .card-list-container {
-        height: 230px;
         overflow: hidden;
     }
     .card-list {
         @include flex(row);
         white-space: nowrap;
         overflow: auto;
-        padding-bottom: 40px;
+
 
         .scroll-card {
             flex-shrink: 0;

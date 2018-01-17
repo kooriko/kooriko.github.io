@@ -36,6 +36,7 @@ export default {
         }
     },
     created () {
+        this.$bus.$off('handleClick');
         this.$bus.$on('handleClick', (index, times = 10) => {
             const { menu } = this.$refs;
             const originCenter = menu.scrollLeft + (menu.offsetWidth / 2);

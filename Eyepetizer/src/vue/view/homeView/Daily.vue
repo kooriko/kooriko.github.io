@@ -1,10 +1,25 @@
 <template lang="pug">
-    h1 daily!!
+    section.m-section
+        component(v-for="(item, index) in dailyData" :key="index" :is="item.type" :data="item.data")
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+export default {
+    computed: {
+        ...mapGetters('videos', [
+            'dailyData'
+        ])
+    },
+    methods: {
+        requestDailyData () {
+            this.$store.dispatch('videos/requestDailyData');
+        }
+    },
+    created () {
+        this.requestDailyData();
+    }
 }
 </script>
 

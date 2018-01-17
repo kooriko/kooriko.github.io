@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         async getDiscoveryData () {
-            await this.$store.dispatch('videos/requestDiscoveryData');
+            await this.$store.dispatch('videos/requestDiscoveryData', { category: this.$route.query.category });
         }
     },
     created () {
