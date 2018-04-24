@@ -1,0 +1,42 @@
+.page_image {
+  position: absolute;
+  left: 0; right: 0;
+  height: 100vh;
+  color: #FFF;
+  z-index: 1;
+  transition: background-position 2s;
+
+  &.is-half {
+    background-size: auto 120%;
+    background-position: 20% 50%;
+    &.page_image--totop {
+      background-position: 20% 0%;
+    }
+    &.page_image--tobottom {
+      background-position: 20% 100%;
+    }
+  }
+  &.is-full {
+    background-size: cover;
+    background-position: 50%, 50%;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: rgba(74, 74, 74, 0.3);
+  }
+}
+.page {
+  position: relative;
+  color: #FFF;
+  overflow: hidden;
+
+  .page_title {
+    position: relative;
+    text-shadow: 0 0 4vw rgba(255, 255, 255, .3);
+    line-height: 2.2em;
+    margin: 30vh 4vw 10vw;
+    z-index: 10;
+  }
+}
